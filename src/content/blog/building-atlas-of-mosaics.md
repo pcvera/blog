@@ -91,6 +91,9 @@ approach synchronization, we can lose messages over the wire, have clients work
 offline for a while, accept messages out of order, etc, and still have all
 clients come to a consensus.
 
+This is a screenshot of the "proof of concept", it looks super quaint in retrospect.
+![Proof of concept](../../assets/proof-screenshot.png)
+
 I was a little overzealous trying to push this synchronization scheme into the
 main codebase - basically as I was ready to merge it into the main codebase, I
 was told that, for the safety of the hunt site, I needed to pull it out into
@@ -135,7 +138,11 @@ After merging this all in, I triumphantly announced before a testsolve that it
 would be the first test with synchronization in place. Once it got going, people
 started reporting that they were not seeing sync happen at all, sync might work
 for a short time, people would see each other's edits, but it would stop working
-quietly and people's local state would diverge from one another.
+quietly and people's local state would diverge from one another. It turned out
+that testing with a single-digit number of peers and a short document history
+that you would test with locally didn't really exercise the limits of the
+system, and when you add the Nth new peer that needs the entire history of the
+document we started getting into trouble.
 
 I was pretty baffled, but the team was able to identify that at some point we
 were exceeding the 100MB memory limit of the Durable Objects. Identifying this
@@ -168,8 +175,9 @@ embarrassment.
 
 ## Speculating on the Root Cause
 Before I tell you exactly what we did to salvage the situation, I'm going to
-take a moment to speculate on the root cause. I still don't have a real
-understanding, but this is my headcanon that fits the evidence I have so far.
+take a moment to speculate on the root cause of the issue. I still don't have a
+concrete understanding, but this is my headcanon that fits the evidence I have so
+far.
 
 I think the problem is that Automerge's (or more accurately `automerge-repo`'s)
 algorithm for finding out what clients have what document revisions prompts you
@@ -180,9 +188,9 @@ messages to clients. The Durable Object itself wouldn't crash for some time
 after that, while `automerge-repo` kept trying and failing to do sync operations
 until the Durable Object ran out of memory and eventually died. Redeploying the
 Durable Object would clear the memory and allow the Durable Object to start from
-scratch again.
+scratch again, syncing for another short time.
 
-# The Solution
+## The Solution
 Looking back, I can't believe how close to hunt we actually had this
 conversation. On December 17th(!) at 5:30 PM, Herman said 
 > I think there are some other higher level options for rearchitecting this such
@@ -195,9 +203,9 @@ conversation. On December 17th(!) at 5:30 PM, Herman said
 Which tickled my brain, I had tunnel-visioned on Automerge earlier in the year
 because I didn't know what sort of puzzles people were going to write - someone
 could have wanted a tile they could type into or something like that. But *now*
-we were past the point where people were going to be ideating new puzzles - we
-had actually landed our constraints, and lucky for us we had a very simple set
-of constraints that could be built in to a fully custom sync engine.
+we were way past the point where people were going to be ideating new puzzles -
+we had actually landed our constraints, and lucky for us we had a very simple
+set of constraints that could be built in to a fully custom sync engine.
 
 Herman and Kevin continued to speculate about deployment strategies with more
 memory, but I suggested that one Durable Object per team with a simpler scheme
@@ -314,7 +322,6 @@ gonna try to debug it.
 ![Atlas of Mosaics access map](../../assets/atlas-request-locations.png) It
 feels pretty neat that people from all over the world engaged.
 
-
 ## Takeaways
 
 I'm glad Atlas was well received, I'm glad it worked, and I'm glad I got to be
@@ -328,8 +335,8 @@ To distill the stuff I learned this year, I'd say:
    feels very good.
  - Durable Objects have some limitations, but also some serious potential. I
    hesitate to recommend them wholesale because we struggled with them a bit,
-   but my intuition says they're a super cheap way to deploy things that could
-   be explored.
+   but my intuition says they're a super cheap way to deploy things that have
+   super powerful horizontal scalability.
  - Loadtest early.
 
 I still dream about a general solution for team synchronization for puzzle
