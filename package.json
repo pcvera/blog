@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && echo 'Build complete! Push the dist/ folder to your gh-pages branch or docs/ folder'"
+    "deploy": "npm run build && echo 'Build complete! Push the dist/ folder to your gh-pages branch or docs/ folder'",
+    "compact-assets": "node scripts/compact-assets.mjs src/assets"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
