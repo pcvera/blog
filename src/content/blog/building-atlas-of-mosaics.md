@@ -272,10 +272,8 @@ the dev corner to do a team visit to see a team that had just unlocked Atlas,
 but it turned out that it was mostly their remote contingent that was working on
 it. 🤷
 
-The only weekend feedback I managed to take in was a single comment from the
-Puzzler's Club discord:
-> i don't think this is too much of a spoiler but lemme say that atlas is an
-> all-timer round
+The only weekend feedback I managed to take in was a comment from the
+Puzzler's Club discord calling it an "all-timer round".
 
 Hell yes.
 
@@ -284,7 +282,8 @@ The evening before wrapup, I stayed up late pulling together an animation of
 Providence's activity on the map. I did that by pulling down all of Providence's
 edits from the Durable Object and replaying them as fast as possible. I didn't
 need reactivity, so all of the changes were simply imperatively applied to the
-DOM. Here it is:
+DOM. Part of it got shown on the wrapup slide for the round, here it is in its
+entirety:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZeRD5khRQdQ?si=Bgyf8cGHRu3UaQkL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
