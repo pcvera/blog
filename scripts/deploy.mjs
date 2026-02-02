@@ -6,7 +6,7 @@
  */
 
 import { execSync } from 'child_process';
-import { existsSync, cpSync, rmSync } from 'fs';
+import { existsSync, cpSync, rmSync, writeFileSync } from 'fs';
 import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -74,11 +74,16 @@ for (const file of allFiles) {
 // Copy dist contents to pages
 cpSync(distDir, pagesDir, { recursive: true });
 
+// Create .nojekyll file to disable Jekyll processing on GitHub Pages
+const nojekyllFile = join(pagesDir, '.nojekyll');
+writeFileSync(nojekyllFile, '');
+
 // Restore the .git file
 cpSync(gitFileBackup, gitFile);
 rmSync(gitFileBackup);
 
 console.log('✅ Build copied to pages/ worktree');
+console.log('✅ Created .nojekyll file');
 console.log('\n📝 Next steps:');
 console.log('   cd pages');
 console.log('   git add .');

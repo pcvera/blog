@@ -1,7 +1,7 @@
 ---
 title: 'Building the Atlas of Mosaics'
 description: 'Building the Atlas of Mosaics for the MIT Mystery Hunt 2026'
-pubDate: 'Jan 30 2026'
+pubDate: 'Feb 01 2026'
 heroImage: '../../assets/atlas-hero.png'
 byline: 'Peter Vera'
 ---
@@ -91,8 +91,8 @@ approach synchronization, we can lose messages over the wire, have clients work
 offline for a while, accept messages out of order, etc, and still have all
 clients come to a consensus.
 
-This is a screenshot of the "proof of concept", it looks super quaint in retrospect.
-![Proof of concept](../../assets/proof-screenshot.png)
+This is a screenshot of the "proof of concept", it looks super quaint in
+retrospect. ![Proof of concept](../../assets/proof-screenshot.png)
 
 I was a little overzealous trying to push this synchronization scheme into the
 main codebase - basically as I was ready to merge it into the main codebase, I
@@ -140,14 +140,14 @@ started reporting that they were not seeing sync happen at all, sync might work
 for a short time, people would see each other's edits, but it would stop working
 quietly and people's local state would diverge from one another. It turned out
 that testing with a single-digit number of peers and a short document history
-that you would test with locally didn't really exercise the limits of the
-system, and when you add the Nth new peer that needs the entire history of the
-document we started getting into trouble.
+didn't really exercise the limits of the system, and when you add the Nth new
+peer that needs the entire history of the document we started getting into
+trouble.
 
 I was pretty baffled, but the team was able to identify that at some point we
 were exceeding the 100MB memory limit of the Durable Objects. Identifying this
 was difficult because Durable Objects don't provide much observability to begin
-with and they sample logging, so you might not even see the error log at all.
+with and they sample logging, so you might not even see the error log at all. 
 
 I spent a pretty long time trying to mitigate this issue - reducing the number
 and size of the edits that were being written to the Automerge document. These
@@ -158,17 +158,17 @@ testsolve.
 ## The Looming Panic
 Some time around the full round testsolve IN EARLY DECEMBER, I had done all I
 could to reduce the memory footprint of our Automerge implementation. It's
-pretty hard to drive real interaction patterns when you're testing locally, so the
-full round testsolve was the next chance to see how it would hold up to real
+pretty hard to drive real interaction patterns when you're testing locally, so
+the full round testsolve was the next chance to see how it would hold up to real
 usage. And it stayed up... for about 7 minutes at a time. We ran a script to
 redeploy the Durable Objects every 7 minutes to have it shake off whatever issue
 it had.
 
-This was the most stressful part of the hunt for me - I was in a state of high
-anxiety about this entire thing for the following weeks. I was pulling late
-nights trying to mash out an increasingly complex solution involving sharding
-the Automerge document even further, giving teams fleets of Durable Objects, one
-per level, etc.
+This was the most stressful part of writing the hunt for me - I was in a state
+of high anxiety about this entire thing for the following weeks. I was pulling
+late nights trying to mash out an increasingly complex solution involving
+sharding the Automerge document even further, giving teams fleets of Durable
+Objects, one per level, etc.
 
 I remember telling my wife that I felt like I was heading for a major public
 embarrassment.
@@ -176,13 +176,14 @@ embarrassment.
 ## Speculating on the Root Cause
 Before I tell you exactly what we did to salvage the situation, I'm going to
 take a moment to speculate on the root cause of the issue. I still don't have a
-concrete understanding, but this is my headcanon that fits the evidence I have so
-far.
+concrete understanding - this wasn't recreatable locally, or even in production
+unless you had a significant number of client connections and edit history - but
+this is my headcanon that fits the evidence I have so far.
 
 I think the problem is that Automerge's (or more accurately `automerge-repo`'s)
 algorithm for finding out what clients have what document revisions prompts you
 to allocate unbounded memory for messages between clients. My suspicion is that
-those were hitting some unstated limit of buffer size in the runtime of Durable
+those were hitting some unstated limit on buffer size in the runtime of Durable
 Objects, meaning that `automerge-repo` couldn't send those too-large sync
 messages to clients. The Durable Object itself wouldn't crash for some time
 after that, while `automerge-repo` kept trying and failing to do sync operations

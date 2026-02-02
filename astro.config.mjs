@@ -6,13 +6,14 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	// Update this to your GitHub Pages URL
-	// For project pages: 'https://username.github.io/repo-name'
-	// For user/org pages: 'https://username.github.io'
+	// Update this to your custom domain
+	// When using a custom domain with GitHub Pages, the site is served from root
 	site: 'https://example.com',
 	
-	// If deploying to a project page (not user/org page), uncomment and set base:
-	// base: '/repo-name',
+	// With a custom domain, serve from root (no base path needed)
+	// If you need to support both custom domain and GitHub Pages subpath, you can
+	// use an environment variable: base: import.meta.env.BASE_URL || '/blog/',
+	base: '/',
 	
 	output: 'static',
 	integrations: [mdx(), sitemap()],
