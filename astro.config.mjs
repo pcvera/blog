@@ -15,5 +15,6 @@ export default defineConfig({
 	// base: '/repo-name',
 	
 	output: 'static',
+	outDir: './pages',
 	integrations: [mdx(), sitemap()],
 });
