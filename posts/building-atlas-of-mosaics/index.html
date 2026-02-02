@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="🥪" href="https://example.com/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://example.com/posts/building-atlas-of-mosaics/"><!-- Primary Meta Tags --><title>Building the Atlas of Mosaics</title><meta name="title" content="Building the Atlas of Mosaics"><meta name="description" content="Building the Atlas of Mosaics for the MIT Mystery Hunt 2026"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://example.com/posts/building-atlas-of-mosaics/"><meta property="og:title" content="Building the Atlas of Mosaics"><meta property="og:description" content="Building the Atlas of Mosaics for the MIT Mystery Hunt 2026"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://example.com/posts/building-atlas-of-mosaics/"><meta property="twitter:title" content="Building the Atlas of Mosaics"><meta property="twitter:description" content="Building the Atlas of Mosaics for the MIT Mystery Hunt 2026"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}@font-face{font-family:Atkinson;src:url(/fonts/atkinson-regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Atkinson;src:url(/fonts/atkinson-bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}body{font-family:Atkinson,sans-serif;margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:2.441em}h2{font-size:1.5em}h3{font-size:1.25em}h4{font-size:1.1em}h5{font-size:1em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0 0 1em;font-size:.9em;position:relative}blockquote footer{margin-top:.75em;font-size:.75em;color:rgb(var(--gray));font-style:normal;text-align:right}blockquote footer:before{content:"— "}blockquote cite{font-style:italic}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media(max-width:720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media(max-width:720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow);max-height:clamp(300px,60vh,600px);width:auto;height:auto;object-fit:contain}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.byline[data-astro-cid-bvzihdzo]{margin-top:.5em;margin-bottom:0;color:rgb(var(--gray));font-size:1em}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>🥪</a></h2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/pcvera" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/atlas-hero.C77VYJfI_Z1DJlil.webp" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-01-30T08:00:00.000Z"> Jan 30, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>Building the Atlas of Mosaics</h1> <p class="byline" data-astro-cid-bvzihdzo>Peter Vera</p> <hr data-astro-cid-bvzihdzo> </div>  <p>I was largely responsible for the technical implementation of the Atlas of
+Mosaics round in the 2026 MIT Mystery Hunt. I’m writing this partially to
+confess my sins and partially to let the interested people know how it actually
+worked.</p>
+<p>Firstly, a quick disclaimer: this blog post will contain spoilers for the <a href="https://puzzmon.world/rounds/atlas_of_mosaics">Atlas
+of Mosaics round from the 2026 MIT Mystery
+Hunt</a>. If you’re concerned about
+spoilers, I’d recommend not reading further.</p>
+<p>For the unfamiliar, Atlas of Mosaics was the third “dimension” round in the 2026
+Mystery Hunt, the core conceit of it was that all of the puzzles were presented
+as a series of drag-and-drop puzzles on a hexagonal grid, where all of your team
+could see and interact with the puzzles at the same time.</p>
+<p>Before I get to the details, I’d rather not take credit for other people’s
+efforts, so I’ll quickly narrow in on what I can actually speak about. I was
+largely responsible for the details of the technical implementation of the
+round, but I didn’t design any of the levels or puzzles, nor did I have a hand
+in the meta, or the art, and I only personally did the dev work for one of the
+regions myself. I’m a big brain developer and only a medium brain puzzle author.
+A lot more heroics than just mine were involved in putting the round together.</p>
+<h2 id="rendering-a-hexagonal-grid">Rendering a Hexagonal Grid</h2>
+<p>While on an airplane, I wrote a CSS file that lets us render hexagonal grids.
+I’m pretty proud of it - it’s a purely CSS solution that doesn’t require any
+extra JavaScript. The most popular hexagonal grid rendering library is
+<a href="https://www.npmjs.com/package/react-hexgrid">react-hexgrid</a>, which is great,
+but it wasn’t going to work for us because the base primitive is an SVG, and the
+hexagons on the grid are rendered as <code>polygon</code>s. That might have been ok in the
+end, but at the time I didn’t know what sort of puzzles people were going to
+want to write, so something more flexible was preferable - who knows what we’d
+want to render inside of the hex, limiting the possibilities to only stuff that
+an SVG could support felt like it would be a bad call. I’m having a hard time
+recalling this exactly, but I believe drag-and-drop on <code>polygon</code> elements also
+had questionable support at the time.</p>
+<p>A pure CSS implementation sort of maximizes the amount of interoperability we
+have with other libraries and techniques. As a result we don’t have to do all
+that much to get hex grids to work with things like virtualization - a fun
+secret is that, for performance reasons, when you scroll around Atlas, we’re
+only rendering the visible hexagons, the ones offscreen don’t even exist in the
+DOM.</p>
+<p>I’m so proud that I’m pretty confident that I’m going to clean up the CSS and
+publish it as a standalone library when I get some downtime.</p>
+<h2 id="specifying-levels-on-the-map">Specifying Levels on the Map</h2>
+<p>I really love systems design, especially when it comes to defining the rails
+that developers consume to build stuff. I defined the API for specifying levels
+on the map - it’s an <em>admittedly pretty complicated</em> TypeScript builder pattern,
+where authors associate clues with the coordinates of the hexagon they’re on, as
+well as the bank of hex tiles that solvers can place on the level. The main
+benefit was that the puzzle authors could define their levels in a way that
+would let them avoid leaking the content of their puzzle in the JavaScript
+bundle of the round as the easiest option. (I know y’all are looking at the
+devtools for hints, but I’m one step ahead of you). The strategy was to define
+hex rendering by splitting <em>how</em> to render a hex from <em>what</em> to render in it -
+for example, the client bundle might contain an implementation of a <code>ColorTile</code>
+component, but the specific colors that were exposed in the level that used the
+<code>ColorTile</code> component was defined in the level specification that only got
+bundled into the server.</p>
+<p>Reflecting on it, there are a few things I would have done differently - I
+focused a lot on TypeScript enforcement that would catch mistakes like “did you
+specify that you had an open slot here before you added a clue to this hex?”,
+but in practice people tended to script out their levels from a spreadsheet, so
+that sort of error didn’t end up happening much.</p>
+<h2 id="the-first-pass-at-synchronization">The First Pass at Synchronization</h2>
+<p>In May, I did a proof of concept for synchronization, I was pretty interested in
+achieving a general-case synchronization scheme for any puzzle, so we could have
+the most interactive Mystery Hunt possible, so I went with
+<a href="https://automerge.org/">Automerge</a> (SPOILER: THIS DECISION COST A LOT, THOUGH
+IT MIGHT HAVE BEEN A GOOD CALL AT THE TIME?), which is a general purpose CRDT
+library. For the unfamiliar, CRDTs are a class of algorithms that order edits to
+an object in a way that allows all clients to converge on the same final state.
+The hypothetical benefit is that we don’t have to be very clever about how we
+approach synchronization, we can lose messages over the wire, have clients work
+offline for a while, accept messages out of order, etc, and still have all
+clients come to a consensus.</p>
+<p>This is a screenshot of the “proof of concept”, it looks super quaint in retrospect.
+<img alt="Proof of concept" loading="lazy" decoding="async" fetchpriority="auto" width="3436" height="1706" src="/_astro/proof-screenshot.lcPIjxjh_1fV3lf.webp" ></p>
+<p>I was a little overzealous trying to push this synchronization scheme into the
+main codebase - basically as I was ready to merge it into the main codebase, I
+was told that, for the safety of the hunt site, I needed to pull it out into
+some separate deployment, so that if we had some issues with it, we could
+address it separately or turn down synchronization entirely without affecting
+the experience of the rest of the hunt. This is an extremely correct take, the
+degree of safety it brings is worth the cost of the rewrite. I was already
+terrified of Atlas itself not working, the idea that there was a possible
+universe where Atlas took down the rest of the hunt is terrifying.</p>
+<p>I went to deploy on a fleet of <a href="https://developers.cloudflare.com/durable-objects/">Cloudflare Durable
+Objects</a>, which are the most
+exciting thing I discovered over the course of the year. Semantically, they’re
+like a serverless function, but with a persistent storage attached. So, you
+don’t manage a machine, you just deploy a function, and if it’s no longer needed
+it gets garbage collected. When it’s needed again, the function gets
+reinitialized as a fresh instance, and rehydrated with the state from the
+persistent storage.</p>
+<p>On top of that, Cloudflare will hang on to a websocket attached to a Durable
+Object, so your function can get garbage collected and the websocket connection
+will remain alive, and it’ll spin your function back up if new websocket
+messages come in. You only pay for the compute time when you’re actually using
+the function, but you don’t have to do any magic to manage websocket
+connections.</p>
+<p>On top of THAT, Durable Objects are scoped to whatever namespace you like, so in
+our case we could have a separate namespace for each team. It’s super easy to
+reason about multitenancy when your database is fully isolated at the team
+level!</p>
+<p>The net effect is that, from the client it looks like you have an always-on
+websocket connection on a dedicated machine that serves only their team, and
+you’re only paying for something close to the cost of the compute time you
+actually use.</p>
+<p>The main downside is that Durable Objects are limited to 100MB of memory, which
+DID come into play…</p>
+<h2 id="the-first-tests">The First Tests</h2>
+<p>After merging this all in, I triumphantly announced before a testsolve that it
+would be the first test with synchronization in place. Once it got going, people
+started reporting that they were not seeing sync happen at all, sync might work
+for a short time, people would see each other’s edits, but it would stop working
+quietly and people’s local state would diverge from one another. It turned out
+that testing with a single-digit number of peers and a short document history
+that you would test with locally didn’t really exercise the limits of the
+system, and when you add the Nth new peer that needs the entire history of the
+document we started getting into trouble.</p>
+<p>I was pretty baffled, but the team was able to identify that at some point we
+were exceeding the 100MB memory limit of the Durable Objects. Identifying this
+was difficult because Durable Objects don’t provide much observability to begin
+with and they sample logging, so you might not even see the error log at all.</p>
+<p>I spent a pretty long time trying to mitigate this issue - reducing the number
+and size of the edits that were being written to the Automerge document. These
+would have the effect of making the synchronization functional for incrementally
+longer periods of time, but never actually making it last the duration of a
+testsolve.</p>
+<h2 id="the-looming-panic">The Looming Panic</h2>
+<p>Some time around the full round testsolve IN EARLY DECEMBER, I had done all I
+could to reduce the memory footprint of our Automerge implementation. It’s
+pretty hard to drive real interaction patterns when you’re testing locally, so the
+full round testsolve was the next chance to see how it would hold up to real
+usage. And it stayed up… for about 7 minutes at a time. We ran a script to
+redeploy the Durable Objects every 7 minutes to have it shake off whatever issue
+it had.</p>
+<p>This was the most stressful part of the hunt for me - I was in a state of high
+anxiety about this entire thing for the following weeks. I was pulling late
+nights trying to mash out an increasingly complex solution involving sharding
+the Automerge document even further, giving teams fleets of Durable Objects, one
+per level, etc.</p>
+<p>I remember telling my wife that I felt like I was heading for a major public
+embarrassment.</p>
+<h2 id="speculating-on-the-root-cause">Speculating on the Root Cause</h2>
+<p>Before I tell you exactly what we did to salvage the situation, I’m going to
+take a moment to speculate on the root cause of the issue. I still don’t have a
+concrete understanding, but this is my headcanon that fits the evidence I have so
+far.</p>
+<p>I think the problem is that Automerge’s (or more accurately <code>automerge-repo</code>’s)
+algorithm for finding out what clients have what document revisions prompts you
+to allocate unbounded memory for messages between clients. My suspicion is that
+those were hitting some unstated limit of buffer size in the runtime of Durable
+Objects, meaning that <code>automerge-repo</code> couldn’t send those too-large sync
+messages to clients. The Durable Object itself wouldn’t crash for some time
+after that, while <code>automerge-repo</code> kept trying and failing to do sync operations
+until the Durable Object ran out of memory and eventually died. Redeploying the
+Durable Object would clear the memory and allow the Durable Object to start from
+scratch again, syncing for another short time.</p>
+<h2 id="the-solution">The Solution</h2>
+<p>Looking back, I can’t believe how close to hunt we actually had this
+conversation. On December 17th(!) at 5:30 PM, Herman said</p>
+<blockquote>
+<p>I think there are some other higher level options for rearchitecting this such
+as getting rid of automerge entirely but I don’t think we could possibly
+implement (and thoroughly test) them without spending at least another ~1.5
+weeks at the expense of the rest of hunt :/ The actual syncing we’re doing is
+fairly straightforward since we are essentially just updating a key-value
+store where both keys and values are strings</p>
+</blockquote>
+<p>Which tickled my brain, I had tunnel-visioned on Automerge earlier in the year
+because I didn’t know what sort of puzzles people were going to write - someone
+could have wanted a tile they could type into or something like that. But <em>now</em>
+we were way past the point where people were going to be ideating new puzzles -
+we had actually landed our constraints, and lucky for us we had a very simple
+set of constraints that could be built in to a fully custom sync engine.</p>
+<p>Herman and Kevin continued to speculate about deployment strategies with more
+memory, but I suggested that one Durable Object per team with a simpler scheme
+would not be in danger of memory problems. I didn’t know how we’d handle
+conflicts then, but Kevin came back with:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Option B (still very simple, and matches your “two up-to-date clients both succeed” requirement better): per-key version (CAS)</span></span>
+<span class="line"><span>Server state per key: { value: string, ver: int } (default ver=0 if missing).</span></span>
+<span class="line"><span>Client caches: { value, ver } per key (or fetches it before editing).</span></span>
+<span class="line"><span>Client update message: { key, value, baseVer } where baseVer is what the client last saw for that key.</span></span>
+<span class="line"><span>Server rule:</span></span>
+<span class="line"><span>If baseVer != currentVer(key): reject (stale write). Return { currentValue, currentVer } so client can refresh and decide what to do.</span></span>
+<span class="line"><span>Else: set value, increment ver.</span></span>
+<span class="line"><span>Two up-to-date clients edit different keys → both succeed (they don’t conflict).</span></span>
+<span class="line"><span>Two up-to-date clients edit the same key → only one “wins” (first accepted); the other is rejected and must refresh/retry (or show conflict).</span></span></code></pre>
+<p>Which, he later clarified that this was basically the Check-and-Set algorithm,
+borrowed from memcached. This was all of the pieces that needed to come
+together.</p>
+<p>I think of those three insights as a perfect miracle moment of collaboration
+that saved the round.</p>
+<p>At 10:49 that night I had hacked out sync logic, and around 8 PM the following
+day I had the conflict resolution out. The insights and probing from the team
+were incredibly critical - I had spent so much time trying to bend Automerge to
+work for us, and over the course of 2 evenings I had fully pivoted out of 4
+months of trying and failing, and the result was a fully functional
+synchronization scheme that we understood enough to be confident in.</p>
+<p>To describe the whole thing - when a client opened up the round page, we’d spin
+up a websocket connection to a Durable Object scoped to the team, and flow back
+the current state of the round, which the client would treat as their initial
+source of truth. When a client made a change, we first checked whether it was
+based on a recent enough state of the elements they were modifying, then we’d
+apply the change as an appended list of edits in the state of the Durable
+Object. At the same time we’d make the update to the in-memory state of the
+round. Then we’d flow the contents of the level being modified out to all
+clients, who would simply replace their local state with the new state. If a
+Durable Object was garbage collected and brought back online, we’d recreate the
+in-memory state of the round by replaying all of the edits that had been applied
+to it.</p>
+<p>In the following days we did some work to make it a little more performant, but
+it didn’t need any major changes to serve hunt.</p>
+<h2 id="the-hunt">The Hunt</h2>
+<p>We scheduled our shifts for the hunt to have good coverage of tech people at all
+times. I’m a morning person, so I was off the schedule for sleep between 10 PM
+and 5 AM. Providence unlocked Atlas of Mosaics at 10:45 PM, approximately 15
+minutes after my head hit the pillow. I was on edge the whole night - my anxiety
+about Atlas was powerful enough to negate even the slightest effects of the
+melatonin I took to try to force myself to sleep, I never even got drowsy that
+night.</p>
+<p><em>Somehow, no problems? The whole weekend?</em> It was incredible.</p>
+<p>I wasn’t able to get immediate feedback on it, I was otherwise focused on tasks
+for keeping the hunt running smoothly so I didn’t get to see how people were
+reacting to it live, but it was a no-news-is-good-news situation. I briefly left
+the dev corner to do a team visit to see a team that had just unlocked Atlas,
+but it turned out that it was mostly their remote contingent that was working on
+it. 🤷</p>
+<p>The only weekend feedback I managed to take in was a single comment from the
+Puzzler’s Club discord:</p>
+<blockquote>
+<p>i don’t think this is too much of a spoiler but lemme say that atlas is an
+all-timer round</p>
+</blockquote>
+<p>Hell yes.</p>
+<h2 id="the-aftermath">The Aftermath</h2>
+<p>The evening before wrapup, I stayed up late pulling together an animation of
+Providence’s activity on the map. I did that by pulling down all of Providence’s
+edits from the Durable Object and replaying them as fast as possible. I didn’t
+need reactivity, so all of the changes were simply imperatively applied to the
+DOM. Here it is:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZeRD5khRQdQ?si=Bgyf8cGHRu3UaQkL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>I wasn’t expecting the applause to come when we got to the Atlas slide during
+wrapup, but holy hell did it feel great.</p>
+<p>Since Hunt there have been a number of blogposts and discussions mentioning
+Atlas, just curating the compliments:</p>
+<blockquote>
+  <p>The Atlas of Mosaics. This is so fuckin cool. A technical marvel, I'm SUPER impressed with the fact that this worked at all, let alone as smoothly as it seemed to be.</p>
+  <footer>
+    <cite><a href="https://puzzbee.substack.com/p/this-is-the-metapuzzle-zone-mitmh2026">BuzzBee</a></cite>
+  </footer>
+</blockquote>
+<blockquote>
+  <p>Atlas of Mosaics: This round was so hype and also so insane tech-wise. I don't want to think about how long it took to set this up.</p>
+  <footer>
+    <cite><a href="https://www.alexirpan.com/2026/01/29/mh-2026.html">alexirpan</a></cite>
+  </footer>
+</blockquote>
+<p><em>Feed my ego.</em></p>
+<h2 id="stats">Stats</h2>
+<p><img alt="Atlas of Mosaics usage stats" loading="lazy" decoding="async" fetchpriority="auto" width="1540" height="1224" src="/_astro/atlas-usage.DmRaihE1_Z10uwft.webp" > Looks like we
+served 1.8 million sessions over the course of the hunt, using only 105k
+GB-seconds of compute time. For reference, Cloudflare’s worker paid plan is 5
+dollars a month and comes with 500k GB-seconds of compute time. Don’t look too
+closely at the errors, I found that if you close a tab the websocket marks
+itself as closed unexpectedly and throws an error for us (maybe two?). I’m not
+gonna try to debug it.</p>
+<p><img alt="Atlas of Mosaics access map" loading="lazy" decoding="async" fetchpriority="auto" width="2704" height="1442" src="/_astro/atlas-request-locations.Cpb90nlR_ZY9CCI.webp" > It
+feels pretty neat that people from all over the world engaged.</p>
+<h2 id="takeaways">Takeaways</h2>
+<p>I’m glad Atlas was well received, I’m glad it worked, and I’m glad I got to be
+part of it.</p>
+<p>To distill the stuff I learned this year, I’d say:</p>
+<ul>
+<li>The architecture for synchronization we landed on was simple <em>by necessity</em>.
+I don’t think it would have succeeded if we had tried something more
+complicated.</li>
+<li>Trading a black box problem for a larger scoped but well understood problem
+feels very good.</li>
+<li>Durable Objects have some limitations, but also some serious potential. I
+hesitate to recommend them wholesale because we struggled with them a bit,
+but my intuition says they’re a super cheap way to deploy things that have
+super powerful horizontal scalability.</li>
+<li>Loadtest early.</li>
+</ul>
+<p>I still dream about a general solution for team synchronization for puzzle
+hunts, maybe that’s something I can look at more seriously now that my free time
+is returning.</p>
+<p>Cardinality trusted me a lot to let me take this on (and I stretched that trust
+like 20% past the edge of reasonable). At this point it’s sort of my pattern to
+overinvest in something niche, so I appreciate them bearing with me and trusting
+me enough to invest their effort into writing puzzles doing art and everything
+else that went into this round. We built something great together!</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Peter Vera. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/pcvera" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer>  </body></html>
