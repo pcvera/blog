@@ -19,7 +19,27 @@ const { title, description, image } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+
+<!-- Google Analytics -->
+<>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXGGJ1NZYV"
+  ></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-XXGGJ1NZYV");
+  </script>
+</>
+
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href={`${import.meta.env.BASE_URL}favicon.svg`}
+/>
 <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 <link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
 <link
@@ -33,14 +53,14 @@ const { title, description, image } = Astro.props;
 <!-- Font preloads -->
 <link
   rel="preload"
-  href={`${import.meta.env.BASE_URL}fonts/atkinson-regular.woff`}
+  href="/fonts/atkinson-regular.woff"
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href={`${import.meta.env.BASE_URL}fonts/atkinson-bold.woff`}
+  href="/fonts/atkinson-bold.woff"
   as="font"
   type="font/woff"
   crossorigin
