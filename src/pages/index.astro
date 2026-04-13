@@ -5,7 +5,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE_DESCRIPTION } from "../consts";
 import "@pcvera-puzzles/hexagonal-grids/hexagon.css";
 import "@pcvera-puzzles/hexagonal-grids/offset-grid.css";
 
@@ -36,27 +36,24 @@ const posts = (await getCollection("blog")).sort(
       }
       ul li a {
         display: block;
-        position: relative;
-        overflow: hidden;
       }
-      ul li a img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      ul li a img.hexagon-clip {
         object-fit: cover;
-        margin-bottom: 0;
-      }
-      ul li a h4,
-      ul li a .date {
-        position: relative;
-        z-index: 1;
+        object-position: center;
       }
       .title {
         margin: 0;
         color: rgb(var(--black));
         line-height: 1;
+      }
+      .title-container {
+        width: 100%;
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
       .date {
         margin: 0;
@@ -66,9 +63,15 @@ const posts = (await getCollection("blog")).sort(
       ul li a:hover .date {
         color: rgb(var(--accent));
       }
-      ul li a:hover img {
+      ul li a:hover img.hexagon-clip {
         box-shadow: var(--box-shadow);
       }
+
+      .post-link {
+        width: var(--hex-width);
+        height: var(--hex-height);
+      }
+
       @media (max-width: 720px) {
         ul {
           gap: 0.5em;
@@ -87,7 +90,7 @@ const posts = (await getCollection("blog")).sort(
         class="offset-grid pointy-top"
         style={{
           "--hex-size": "300px",
-          "--gap": "20px",
+          "--gap": "100px",
           "--row-count": Math.ceil((posts.length * 2) / 5),
           "--col-count": 3,
           position: "relative",
@@ -97,21 +100,26 @@ const posts = (await getCollection("blog")).sort(
           {
             posts.map((post, index) => (
               <li>
-                <a class="hexagon-clip" href={`/posts/${post.id}/`}>
+                <a
+                  class="placed-hex post-link"
+                  style={`--r: 0; --q: ${index};`}
+                  href={`/posts/${post.id}/`}
+                >
                   {post.data.heroImage && (
                     <Image
-                      width={720}
-                      height={360}
+                      width={960}
+                      height={540}
                       src={post.data.heroImage}
                       alt=""
-                      class="placed-hex"
-                      style={`--q: 0; --r: ${index};`}
+                      class="hexagon-clip"
                     />
                   )}
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
+                  <div class="title-container">
+                    <h4 class="title">{post.data.title}</h4>
+                    <p class="date">
+                      <FormattedDate date={post.data.pubDate} />
+                    </p>
+                  </div>
                 </a>
               </li>
             ))
