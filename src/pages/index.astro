@@ -37,10 +37,22 @@ const posts = (await getCollection("blog")).sort(
       ul li a {
         display: block;
       }
-      ul li a img.hexagon-clip {
+      .hex-photo {
         display: block;
+        background: rgb(var(--black));
+      }
+      .hex-photo .hex-photo-img {
+        display: block;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         object-position: center;
+        transform: scale(1.1);
+        transform-origin: center center;
+        transition: transform 0.35s ease;
+      }
+      ul li a:hover .hex-photo .hex-photo-img {
+        transform: scale(1);
       }
       .title-container {
         width: 100%;
@@ -73,16 +85,22 @@ const posts = (await getCollection("blog")).sort(
           0 2px 2px rgba(0, 0, 0, 0.75),
           0 0 1em rgba(0, 0, 0, 0.45);
       }
+      .title-container .title,
+      .title-container .date {
+        transform: scale(1);
+        transform-origin: center center;
+        transition: transform 0.15s ease;
+      }
       .title-container .date {
         margin: 0.35rem 0 0;
-        color: rgba(255, 255, 255);
+        color: rgba(255, 255, 255, 1);
         text-shadow: 0 2px 2px rgba(0, 0, 0, 0.65);
       }
-      ul li a:hover h4,
+      ul li a:hover .title-container .title,
       ul li a:hover .title-container .date {
-        color: rgb(var(--accent));
+        transform: scale(1.06);
       }
-      ul li a:hover img.hexagon-clip {
+      ul li a:hover .hex-photo {
         box-shadow: var(--box-shadow);
       }
 
@@ -125,13 +143,15 @@ const posts = (await getCollection("blog")).sort(
                   href={`/posts/${post.id}/`}
                 >
                   {post.data.heroImage && (
-                    <Image
-                      width={960}
-                      height={540}
-                      src={post.data.heroImage}
-                      alt=""
-                      class="hexagon-clip"
-                    />
+                    <span class="hexagon-clip hex-photo">
+                      <Image
+                        width={960}
+                        height={540}
+                        src={post.data.heroImage}
+                        alt=""
+                        class="hex-photo-img"
+                      />
+                    </span>
                   )}
                   <div class="title-container">
                     <h4 class="title">{post.data.title}</h4>
