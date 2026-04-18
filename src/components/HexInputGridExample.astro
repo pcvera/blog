@@ -1,0 +1,101 @@
+---
+import "@pcvera-puzzles/hexagonal-grids/hexagon.css";
+import "@pcvera-puzzles/hexagonal-grids/offset-grid.css";
+
+interface Props {
+  idPrefix: string;
+}
+
+const { idPrefix } = Astro.props;
+
+const colCount = 6;
+const rowCount = 2;
+const hexSize = "48px";
+const gap = "8px";
+const qCountForRow = (r: number) => (r === 1 ? colCount - 1 : colCount);
+/* DOM order: column by column, alternating rows (0,q), (1,q), … for Tab / a11y */
+const cells: { r: number; q: number; id: string }[] = [];
+for (let q = 0; q < colCount; q += 1) {
+  for (let r = 0; r < rowCount; r += 1) {
+    if (q < qCountForRow(r)) {
+      cells.push({ r, q, id: `${idPrefix}-${r}-${q}` });
+    }
+  }
+}
+---
+
+<div class="hex-input-grid-example pointy-top">
+  <div class="hex-board">
+    <div class="hex-board-inner">
+      <section
+        class="offset-grid pointy-top odd-r"
+        style={{
+          "--hex-size": hexSize,
+          "--gap": gap,
+          "--row-count": rowCount + 0.75,
+          "--col-count": colCount,
+          "--y-offset-hexes": -0.5,
+
+          position: "relative",
+        }}
+      >
+        {
+          cells.map(({ r, q, id }) => (
+            <div class="placed-hex hex-cell" style={`--r: ${r}; --q: ${q};`}>
+              <label class="hexagon-clip hex-input-shell">
+                <input
+                  id={id}
+                  type="text"
+                  name={id}
+                  maxlength="1"
+                  inputmode="text"
+                  autocomplete="off"
+                  aria-label={`Hex cell row ${r + 1}, column ${q + 1}`}
+                />
+              </label>
+            </div>
+          ))
+        }
+      </section>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hex-board {
+    margin: 1.5rem auto;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    background: rgba(80, 80, 80, 0.95);
+  }
+  .hex-board-inner {
+    width: fit-content;
+    margin: 0 auto;
+  }
+  .placed-hex.hex-cell {
+    width: var(--hex-width);
+    height: var(--hex-size);
+    box-sizing: border-box;
+  }
+  .hex-input-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .hex-input-shell input {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0.15em 0;
+    border: none;
+    background: transparent;
+    font: inherit;
+    font-size: 1.1rem;
+    text-align: center;
+    color: rgb(var(--gray-dark));
+    outline: none;
+    background: white;
+  }
+</style>

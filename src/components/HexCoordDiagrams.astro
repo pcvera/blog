@@ -1,0 +1,335 @@
+---
+import "@pcvera-puzzles/hexagonal-grids/hexagon.css";
+import "@pcvera-puzzles/hexagonal-grids/offset-grid.css";
+import "@pcvera-puzzles/hexagonal-grids/axial-grid.css";
+
+const hexSize = "36px";
+const gap = "6px";
+
+/* Odd-r / even-r: same nominal width; shorter rows alternate which parity */
+const offColCount = 5;
+const offRowCount = 4;
+
+function columnCountOddR(r: number): number {
+  return offColCount - (r % 2);
+}
+
+function columnCountEvenR(r: number): number {
+  return offColCount - ((r + 1) % 2);
+}
+
+type OffsetCell = { q: number; r: number; label: string };
+
+const oddRCells: OffsetCell[] = [];
+for (let q = 0; q < offColCount; q += 1) {
+  for (let r = 0; r < offRowCount; r += 1) {
+    if (q < columnCountOddR(r)) {
+      oddRCells.push({ q, r, label: `${q},${r}` });
+    }
+  }
+}
+
+const evenRCells: OffsetCell[] = [];
+for (let q = 0; q < offColCount; q += 1) {
+  for (let r = 0; r < offRowCount; r += 1) {
+    if (q < columnCountEvenR(r)) {
+      evenRCells.push({ q, r, label: `${q},${r}` });
+    }
+  }
+}
+
+/* Axial: rectangular range in (q, r) — same pattern as Red Blob’s axial diagrams */
+const axialQMin = 0;
+const axialQMax = 4;
+const axialRMin = 0;
+const axialRMax = 3;
+
+const axialCells: { q: number; r: number; label: string }[] = [];
+for (let r = axialRMin; r <= axialRMax; r += 1) {
+  for (let q = axialQMin; q <= axialQMax; q += 1) {
+    axialCells.push({ q, r, label: `${q},${r}` });
+  }
+}
+
+const axialRowCount = axialRMax - axialRMin + 1;
+const maxAxialHoriz = axialQMax + 0.5 * axialRMax;
+const axialColCount = Math.max(offColCount, Math.ceil(maxAxialHoriz) + 2);
+---
+
+<div class="hex-coord-diagrams pointy-top">
+  <div class="hex-coord-pair">
+    <figure class="hex-coord-figure">
+      <figcaption class="hex-coord-title">Offset odd-r (pointy top)</figcaption>
+      <p class="hex-coord-hint">
+        Labels are <strong>offset</strong> (col, row), stored as <code>--q</code
+        > /
+        <code>--r</code>.
+      </p>
+      <div class="hex-board">
+        <div class="hex-board-inner">
+          <section
+            class="offset-grid pointy-top odd-r"
+            style={{
+              "--hex-size": hexSize,
+              "--gap": gap,
+              "--row-count": offRowCount + 0.75,
+              "--col-count": offColCount,
+              "--y-offset-hexes": -0.5,
+              position: "relative",
+            }}
+          >
+            {
+              oddRCells.map(({ q, r, label }) => (
+                <div
+                  class="placed-hex hex-coord-cell"
+                  style={`--r: ${r}; --q: ${q};`}
+                >
+                  <div class="hexagon-clip hex-coord-label">{label}</div>
+                </div>
+              ))
+            }
+          </section>
+        </div>
+      </div>
+    </figure>
+
+    <figure class="hex-coord-figure">
+      <figcaption class="hex-coord-title">
+        Offset even-r (pointy top)
+      </figcaption>
+      <p class="hex-coord-hint">
+        Same column count, but the <em>even</em> rows are the short ones—compare to
+        odd-r above.
+      </p>
+      <div class="hex-board">
+        <div class="hex-board-inner">
+          <section
+            class="offset-grid pointy-top even-r"
+            style={{
+              "--hex-size": hexSize,
+              "--gap": gap,
+              "--row-count": offRowCount + 0.75,
+              "--col-count": offColCount,
+              "--y-offset-hexes": -0.5,
+              position: "relative",
+            }}
+          >
+            {
+              evenRCells.map(({ q, r, label }) => (
+                <div
+                  class="placed-hex hex-coord-cell"
+                  style={`--r: ${r}; --q: ${q};`}
+                >
+                  <div class="hexagon-clip hex-coord-label">{label}</div>
+                </div>
+              ))
+            }
+          </section>
+        </div>
+      </div>
+    </figure>
+  </div>
+
+  <figure class="hex-coord-figure hex-coord-figure--full">
+    <figcaption class="hex-coord-title">Axial (pointy top)</figcaption>
+    <p class="hex-coord-hint">
+      Labels are <strong>axial</strong> (q, r)—the two skew axes from the cube lattice
+      (<code>q + r + s = 0</code>); here we render a filled rectangle in (q, r).
+    </p>
+    <div class="hex-board">
+      <div class="hex-board-inner">
+        <section
+          class="axial-grid pointy-top"
+          style={{
+            "--hex-size": hexSize,
+            "--gap": gap,
+            "--row-count": axialRowCount + 0.75,
+            "--col-count": axialColCount,
+            "--x-offset-hexes": 0,
+            "--y-offset-hexes": -0.5,
+            position: "relative",
+          }}
+        >
+          {
+            axialCells.map(({ q, r, label }) => (
+              <div
+                class="placed-hex hex-coord-cell"
+                style={`--r: ${r}; --q: ${q};`}
+              >
+                <div class="hexagon-clip hex-coord-label">{label}</div>
+              </div>
+            ))
+          }
+        </section>
+      </div>
+    </div>
+  </figure>
+
+  <figure class="hex-coord-figure hex-coord-figure--full">
+    <figcaption class="hex-coord-title">
+      You don't have to use hexagons
+    </figcaption>
+    <p class="hex-coord-hint">
+      Same odd-r placement as the first board, but each cell is a disc. Use
+      whatever you like as long as you want it to fit in a hexagon.
+    </p>
+    <div class="hex-board">
+      <div class="hex-board-inner">
+        <section
+          class="offset-grid pointy-top odd-r"
+          style={{
+            "--hex-size": hexSize,
+            "--gap": gap,
+            "--row-count": offRowCount + 0.75,
+            "--col-count": offColCount,
+            "--y-offset-hexes": -0.5,
+            position: "relative",
+          }}
+        >
+          {
+            oddRCells.map(({ q, r, label }) => (
+              <div
+                class="placed-hex hex-coord-cell hex-coord-cell--circle"
+                style={`--r: ${r}; --q: ${q};`}
+              >
+                <span class="hex-lattice-circle" aria-hidden="true" />
+              </div>
+            ))
+          }
+        </section>
+      </div>
+    </div>
+  </figure>
+</div>
+
+<style>
+  .hex-coord-diagrams {
+    margin: 1.5rem 0;
+  }
+
+  .hex-coord-pair {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 720px) {
+    .hex-coord-pair {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .hex-coord-figure {
+    margin: 0;
+  }
+
+  .hex-coord-title {
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: rgb(var(--black));
+  }
+
+  .hex-coord-hint {
+    margin: 0 0 0.75rem;
+    font-size: 0.92em;
+    line-height: 1.45;
+    color: rgb(var(--gray));
+  }
+
+  .hex-coord-hint code {
+    font-size: 0.9em;
+  }
+
+  .hex-coord-figure--full {
+    margin-top: 1.5rem;
+  }
+
+  .hex-coord-figure--full + .hex-coord-figure--full {
+    margin-top: 1.25rem;
+  }
+
+  .hex-board {
+    margin: 0 auto;
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+    background: rgba(80, 80, 80, 0.95);
+    border-radius: 8px;
+  }
+
+  .hex-board-inner {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .placed-hex.hex-coord-cell {
+    width: var(--hex-width);
+    height: var(--hex-size);
+    box-sizing: border-box;
+  }
+
+  .hex-coord-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 0.1em;
+    font-size: 0.65rem;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: rgb(var(--gray-dark));
+    background: rgba(255, 255, 255, 0.92);
+    user-select: none;
+  }
+
+  .placed-hex.hex-coord-cell--circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  /*
+   * Kissing circles: diameter ≈ nearest center-to-center step from the offset
+   * layout (horizontal step vs row step; take the smaller so discs stay tangent).
+   */
+  .hex-lattice-circle {
+    flex-shrink: 0;
+    width: var(--hex-pack-diameter);
+    height: var(--hex-pack-diameter);
+    border-radius: 50%;
+    box-sizing: border-box;
+    background:
+      radial-gradient(
+        circle at 30% 28%,
+        rgba(255, 255, 255, 0.35),
+        transparent 55%
+      ),
+      orangered;
+    box-shadow: 0 1px 2px rgba(var(--black), 0.35);
+  }
+
+  .hex-coord-diagrams .offset-grid:has(.hex-coord-cell--circle) {
+    --hex-pack-pitch-x: calc(var(--hex-width) + var(--gap));
+    --hex-pack-pitch-y: calc(var(--hex-size) * 0.75 + var(--gap));
+    --hex-pack-diameter: min(var(--hex-pack-pitch-x), var(--hex-pack-pitch-y));
+  }
+
+  .hex-coord-attrib {
+    margin: 1rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: rgb(var(--gray));
+  }
+
+  .hex-coord-attrib a {
+    color: var(--accent);
+  }
+
+  .hex-coord-attrib code {
+    font-size: 0.88em;
+  }
+</style>

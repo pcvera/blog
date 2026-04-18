@@ -1,0 +1,53 @@
+---
+title: "Publishing My Hexagonal Grid CSS Library"
+description: "I published my Hexagonal Grid CSS Library, this is an explanation of why I made the choices I did."
+pubDate: "Apr 12 2026"
+heroImage: '../../assets/atlas-hero.png'
+byline: "Peter Vera"
+---
+
+import HexInputGridExample from "../../components/HexInputGridExample.astro";
+import HexCoordDiagrams from "../../components/HexCoordDiagrams.astro";
+
+I finally cleaned up the hex grid stylesheet I wrote when I was building [The
+Atlas of Mosaics](https://puzzmon.world/rounds/atlas_of_mosaics) and published
+it as
+[`@pcvera-puzzles/hexagonal-grids`](https://www.npmjs.com/package/@pcvera-puzzles/hexagonal-grids)
+on npm. If you want a more detailed writeup of developing the round
+specifically, I wrote [Building the Atlas of
+Mosaics](/posts/building-atlas-of-mosaics/). In that post I mentioned I was
+planning to publish my stylesheet as a library, and I finally got around to it.
+
+## Why CSS?
+
+At the outset, we knew we needed a hex grid but beyond that we didn't have any
+other requirements or constraints. Though we ended up doing entirely read-only
+content, early on we talked about input elements, so I had to consider that when
+I was getting started on the round. Going for raw CSS was the easiest way to 
+maximize interoperability with other libraries and techniques.
+
+That also explains why I didn't choose to use something like
+[react-hexgrid](https://github.com/hellenic/react-hexgrid), which got me started
+with some inspiration, but was too limited for our needs. It's implemented as an
+SVG-centric approach, the main limitation for us was that its Drag and Drop
+example made use of the `user-drag` CSS property, which is not well-supported -
+caniuse says it's around 30% of browsers today.
+
+So raw CSS is the way we get away with being able to handle legitimately arbitrary
+content inside each hex.
+
+For example, this hex grid is a bunch of text inputs, you can tab through in
+the order that you render the hexes in! 
+<HexInputGridExample idPrefix="publishing-hex-input-demo" />
+
+On top of that, initial discussions were actually around running an *infinite*
+grid of hexagons, using raw CSS made it trivial to interop with virtualization
+libraries.
+
+## Some more illustrative examples
+
+Just recreating some of the grids from the Red Blob Games [Hexagonal
+Grids](https://www.redblobgames.com/grids/hexagons/) guide
+<HexCoordDiagrams />
+
+
